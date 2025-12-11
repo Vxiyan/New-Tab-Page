@@ -1,19 +1,19 @@
- // Get the elements by their IDs
-const menuIcon = document.getElementById('menuIcon');
+// NewTabPage.js
+
+// Target all elements with the class 'menuIcon'
+const menuIcons = document.querySelectorAll('.menuIcon');
+
+// Target the popup menu using its ID 'popupMenu'
 const popupMenu = document.getElementById('popupMenu');
 
-// Add an event listener to the icon
-menuIcon.addEventListener('click', function() {
-  // Toggle the 'visible' class on the popup menu
-  popupMenu.classList.toggle('visible');
-});
-
-// Optional: Add functionality to close the menu if the user clicks outside of it
-document.addEventListener('click', function(event) {
-  const isClickInside = menuIcon.contains(event.target) || popupMenu.contains(event.target);
-
-  if (!isClickInside) {
-    // If the click happened outside the menu or icon, hide the menu
-    popupMenu.classList.remove('visible');
-  }
-});
+// If elements exist, add the click listener to each one found
+if (menuIcons.length > 0 && popupMenu) {
+    menuIcons.forEach(icon => {
+        icon.addEventListener('click', function(event) {
+            event.preventDefault();
+            popupMenu.classList.toggle('visible');
+        });
+    });
+} else {
+    console.error("Error: Could not find .menuIcon or #popupMenu elements.");
+}
